@@ -3,10 +3,10 @@ layout: page
 title: Setup
 ---
 
-This workshop is designed to be run on pre-imaged Amazon Web Services 
-(AWS) instances. All the software and data used in the workshop are 
-hosted on an Amazon Machine Image (AMI). For information about how to
-use the workshop materials, see the 
-[setup instructions](http://www.datacarpentry.org/genomics-workshop/setup.html) on the main workshop page.
+First make sure you have a Unix-type shell on your computer.
 
+On a Mac or Linux machine, you can access a shell through a program called Terminal, which is already available
+on your computer. If you're using Windows, you'll need to download a separate program to access the shell. [Follow this tutorial to install Git Bash on Windows](https://www.youtube.com/watch?v=339AEqk9c-8).
+
+The workshop uses data from https://github.com/ceumicrodata/scientific-computing-bootcamp/tree/master/data. You will learn in a later lesson how to work with git and GitHub. For now, your instructor will help save the datafiles to your computer.
 
