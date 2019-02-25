@@ -24,30 +24,30 @@ We've also learned how to use `cd` to change locations and `ls` to list the cont
 of a directory. Now we're going to learn some additional commands for moving around 
 within our file system.
 
-Use the commands we've learned so far to navigate to the `shell_data/untrimmed_fastq` directory, if
+Use the commands we've learned so far to navigate to the `data/CEPII` directory, if
 you're not already there. 
 
 ~~~
 $ cd
-$ cd shell_data
-$ cd untrimmed_fastq
+$ cd data
+$ cd CEPII
 ~~~
 {: .bash}
 
 What if we want to move back up and out of this directory and to our top level 
-directory? Can we type `cd shell_data`? Try it and see what happens.
+directory? Can we type `cd data`? Try it and see what happens.
 
 ~~~
-$ cd shell_data
+$ cd data
 ~~~
 {: .bash}
 
 ~~~
--bash: cd: shell_data: No such file or directory
+-bash: cd: data: No such file or directory
 ~~~
 {: .output}
 
-Your computer looked for a directory or file called `shell_data` within the 
+Your computer looked for a directory or file called `data` within the 
 directory you were already in. It didn't know you wanted to look at a directory level
 above the one you were located in. 
 
@@ -68,7 +68,7 @@ $ pwd
 {: .bash}
 
 ~~~
-/home/dcuser/shell_data
+/home/username/data
 ~~~
 {: .output}
 
@@ -91,11 +91,11 @@ $ ls ../../
 ~~~
 {: .bash}
 
-prints the contents of `/home`, which is one level up from your root directory. 
+prints the contents of `/home`, which is one level up from your home directory. 
 
 > ## Finding hidden directories
 >
-> First navigate to the `shell_data` directory. There is a hidden directory within this directory. Explore the options for `ls` to 
+> First navigate to the `data` directory. There is a hidden directory within this directory. Explore the options for `ls` to 
 > find out how to see hidden directories. List the contents of the directory and 
 > identify the name of the text file in that directory.
 > 
@@ -118,7 +118,9 @@ prints the contents of `/home`, which is one level up from your root directory.
 > > {: .bash}
 > > 
 > > ~~~
-> > .  ..  .hidden	sra_metadata  untrimmed_fastq
+> > .			CEPII			download.sh
+> > ..			README.md		offeneregister.de
+> > .hidden			WorldBank
 > > ~~~
 > > {: .output}
 > > 
@@ -162,16 +164,17 @@ $ cd
 Then enter the command:
 
 ~~~
-$ ls shell_data
+$ ls data
 ~~~
 {: .bash}
 
 ~~~
-sra_metadata  untrimmed_fastq
+CEPII			WorldBank		offeneregister.de
+README.md		download.sh
 ~~~
 {: .output}
 
-This will list the contents of the `shell_data` directory without
+This will list the contents of the `data` directory without
 you needing to navigate there.
 
 The `cd` command works in a similar way.
@@ -180,28 +183,28 @@ Try entering:
 
 ~~~
 $ cd
-$ cd shell_data/untrimmed_fastq
+$ cd data/CEPII
 ~~~
 {: .bash}
 
-This will take you to the `untrimmed_fastq` directory without having to go through
+This will take you to the `CEPII` directory without having to go through
 the intermediate directory.
 
 > ## Navigating practice
 > 
-> Navigate to your home directory. From there, list the contents of the `untrimmed_fastq` 
+> Navigate to your home directory. From there, list the contents of the `CEPII` 
 > directory. 
 > 
 > > ## Solution
 > >
 > > ~~~
 > > $ cd
-> > $ ls shell_data/untrimmed_fastq/
+> > $ ls data/CEPII/
 > > ~~~
 > > {: .bash}
 > > 
 > > ~~~
-> > SRR097977.fastq  SRR098026.fastq 
+> > dist_cepii.dta	download.sh 
 > > ~~~
 > > {: .output}
 > > 
@@ -226,21 +229,21 @@ $ pwd
 You will see: 
 
 ~~~
-/home/dcuser
+/home/username
 ~~~
 {: .output}
 
 This is the full name of your home directory. This tells you that you
-are in a directory called `dcuser`, which sits inside a directory called
+are in a directory called `username`, which sits inside a directory called
 `home` which sits inside the very top directory in the hierarchy. The
 very top of the hierarchy is a directory called `/` which is usually
-referred to as the *root directory*. So, to summarize: `dcuser` is a
+referred to as the *root directory*. So, to summarize: `username` is a
 directory in `home` which is a directory in `/`.
 
 Now enter the following command:
 
 ~~~
-$ cd /home/dcuser/shell_data/.hidden
+$ cd /home/username/data/.hidden
 ~~~
 {: .bash}
 
@@ -255,7 +258,7 @@ $ cd
 You can also navigate to the `.hidden` directory using:
 
 ~~~
-$ cd shell_data/.hidden
+$ cd data/.hidden
 ~~~
 {: .bash}
 
@@ -306,7 +309,7 @@ navigate amongst them.
 
 There are some shortcuts which you should know about. Dealing with the
 home directory is very common. The tilde character,
-`~`, is a shortcut for your home directory. Navigate to the `shell_data`
+`~`, is a shortcut for your home directory. Navigate to the `data`
 directory:
 
 ~~~
@@ -323,7 +326,7 @@ $ ls ~
 {: .bash}
 
 ~~~
-shell_data
+data
 ~~~
 {: .output}
 

@@ -21,79 +21,79 @@ keypoints:
 
 ## Working with Files
 
-### Our data set: FASTQ files
+### Our data set: CSV files
 
-Now that we know how to navigate around our directory structure, lets
-start working with our sequencing files. We did a sequencing experiment and 
-have two results files, which are stored in our `untrimmed_fastq` directory. 
+Now that we know how to navigate around our directory structure, let's
+start working with our data sets. We donwloaded data on procurement contracts from the World Bank to the `WorldBank` directory. 
 
 ### Wild cards
 
-Navigate to your `untrimmed_fastq` directory.
+Navigate to your `WorldBank` directory.
 
 ~~~
-$ cd ~/shell_data/untrimmed_fastq
+$ cd ~/data/WorldBank
 ~~~
 {: .bash}
 
-We are interested in looking at the FASTQ files in this directory. We can list
-all files with the .fastq extension using the command:
+We are interested in looking at the CSV file in this directory. We can list
+all files with the .csv extension using the command:
 
 ~~~
-$ ls *.fastq
+$ ls *.csv
 ~~~
 {: .bash}
 
 ~~~
-SRR097977.fastq  SRR098026.fastq
+Corporate_Procurement_Contract_Awards.csv
 ~~~
 {: .output}
 
 The `*` character is a special type of character called a wildcard, which can be used to represent any number of any type of character. 
-Thus, `*.fastq` matches every file that ends with `.fastq`. 
+Thus, `*.csv` matches every file that ends with `.csv`. 
 
 This command: 
 
 ~~~
-$ ls *977.fastq
+$ ls *Awards.csv
 ~~~
 {: .bash}
 
 ~~~
-SRR097977.fastq
+Corporate_Procurement_Contract_Awards.csv
 ~~~
 {: .output}
 
-lists only the file that ends with `977.fastq`.
+lists only the file that ends with `Awards.csv`.
 
 We can use the command `echo` to see how the wildcard character is intepreted by the
 shell.
 
 ~~~
-$ echo *.fastq
+$ echo *.csv
 ~~~
 {: .bash}
 
 ~~~
-SRR097977.fastq SRR098026.fastq
+Corporate_Procurement_Contract_Awards.csv
 ~~~
 {: .output}
 
-The `*` is expanded to include any file that ends with `.fastq`.
+The `*` is expanded to include any file that ends with `.csv`.
 
 This command:
 
 ~~~
-$ ls /usr/bin/*.sh
+$ ls /usr/local/bin/b*
 ~~~
 {: .bash}
 
 ~~~
-/usr/bin/amuFormat.sh  /usr/bin/gettext.sh  /usr/bin/gvmap.sh
+/usr/local/bin/bead	/usr/local/bin/bs	/usr/local/bin/bundler
+/usr/local/bin/brew	/usr/local/bin/bundle
 ~~~
 {: .output}
 
-Lists every file in `/usr/bin` that ends in the characters `.sh`.
+Lists every file in `/usr/local/bin` that starts with the character `b`.
 
 > ## Home vs. Root
 > 
@@ -164,8 +164,8 @@ For example, if your history looked like this:
 
 ~~~
 259  ls *
-260  ls /usr/bin/*.sh
-261  ls *R1*fastq
+260  ls /usr/local/bin/b*
+261  ls *.csv
 ~~~
 {: .output}
 
@@ -180,8 +180,8 @@ Type `!` (exclamation point) and then the number of the command from your histor
 You will be glad you learned this when you need to re-run very complicated commands.
 
 > ## Exercise
-> Find the line number in your history for the command that listed all the .sh
-> files in `/usr/bin`. Rerun that command.
+> Find the line number in your history for the command that listed all the 
+> files starting with `b` in `/usr/local/bin`. Rerun that command.
 >
 > > ## Solution
 > > First type `history`. Then use `!` followed by the line number to rerun that command.
@@ -197,26 +197,26 @@ contents of directories, but how do we look at the contents of files?
 One way to examine a file is to print out all of the
 contents using the program `cat`. 
 
-Enter the following command from within the `untrimmed_fastq` directory: 
+Enter the following command from within the `WorldBank` directory: 
 
 ~~~
-$ cat SRR098026.fastq
+$ cat Corporate_Procurement_Contract_Awards.csv
 ~~~
 {: .bash}
 
-This will print out all of the contents of the `SRR098026.fastq` to the screen.
+(Remember, you can use TAB completion.) This will print out all of the contents of the `Corporate_Procurement_Contract_Awards.csv` to the screen.
 
 
 > ## Exercise
 > 
-> 1. Print out the contents of the `~/shell_data/untrimmed_fastq/SRR097977.fastq` file. What is the last line of the file? 
+> 1. Print out the contents of the `~/data/WorldBank/Corporate_Procurement_Contract_Awards.csv` file. What is the last line of the file? 
 > 2.  From your home directory, and without changing directories,
 > use one short command to print the contents of all of the files in
-> the `~/shell_data/untrimmed_fastq` directory.
+> the `~/data/WorldBank` directory.
 > 
 > > ## Solution
-> > 1. The last line of the file is `TC:CCC::CCCCCCCC<8?6A:C28C<608'&&&,'$`.
-> > 2. `cat ~/shell_data/untrimmed_fastq/*`
+> > 1. The last line of the file is `06/29/2018 12:00:00 AM,Q4 - FY18,CONTRACT CONSULTANTS,Mobile Partners Career Program,IBRD,18-0449,Net Expat Inc.,USA,US,,WBG,WBG HR Vice Presidency`.
+> > 2. `cat ~/data/WorldBank`
 > {: .solution}
 {: .challenge}
 
@@ -228,7 +228,7 @@ are identical to the `man` program.
 Enter the following command:
 
 ~~~
-$ less SRR097977.fastq
+$ less Corporate_Procurement_Contract_Awards.csv
 ~~~
 {: .bash}
 
@@ -250,22 +250,22 @@ that word is found.
 **Shortcut:** If you hit "/" then "enter", `less` will  repeat
 the previous search. `less` searches from the current location and
 works its way forward. Note, if you are at the end of the file and search
-for the sequence "CAA", `less` will not find it. You either need to go to the
+for the string "SOFTWARE", `less` will not find it. You either need to go to the
 beginning of the file (by typing `g`) and search again using `/` or you
 can use `?` to search backwards in the same way you used `/` previously.
 
-For instance, let's search forward for the sequence `TTTTT` in our file. 
-You can see that we go right to that sequence, what it looks like,
+For instance, let's search forward for the string `SOFTWARE` in our file. 
+You can see that we go right to that string, what it looks like,
 and where it is in the file. If you continue to type `/` and hit return, you will move 
-forward to the next instance of this sequence motif. If you instead type `?` and hit 
-return, you will search backwards and move up the file to previous examples of this motif.
+forward to the next instance of this string. If you instead type `?` and hit 
+return, you will search backwards and move up the file to previous examples of this string.
 
 > ## Exercise
 >
-> What are the next three nucleotides (characters) after the first instance of the sequence quoted above?
+> What is the next word after the first instance of the string "`AUDIO`"?
 > 
 > > ## Solution
-> > `CAC`
+> > `VISUAL`
 > {: .solution}
 {: .challenge}
 
@@ -281,40 +281,40 @@ The commands are `head` and `tail` and they let you look at
 the beginning and end of a file, respectively.
 
 ~~~
-$ head SRR098026.fastq
+$ head Corporate_Procurement_Contract_Awards.csv
 ~~~
 {: .bash}
 
 ~~~
-@SRR098026.1 HWUSI-EAS1599_1:2:1:0:968 length=35
-NNNNNNNNNNNNNNNNCNNNNNNNNNNNNNNNNNN
-+SRR098026.1 HWUSI-EAS1599_1:2:1:0:968 length=35
-!!!!!!!!!!!!!!!!#!!!!!!!!!!!!!!!!!!
-@SRR098026.2 HWUSI-EAS1599_1:2:1:0:312 length=35
-NNNNNNNNNNNNNNNNANNNNNNNNNNNNNNNNNN
-+SRR098026.2 HWUSI-EAS1599_1:2:1:0:312 length=35
-!!!!!!!!!!!!!!!!#!!!!!!!!!!!!!!!!!!
-@SRR098026.3 HWUSI-EAS1599_1:2:1:0:570 length=35
-NNNNNNNNNNNNNNNNANNNNNNNNNNNNNNNNNN
+Award Date,Quarter and Fiscal Year,Commodity Category,Contract Description,WBG Organization,Selection Number,Supplier,Supplier Country,Supplier Country Code,Contract Award Amount,Fund Source,VPU description
+09/30/2013 12:00:00 AM,Q1 - FY14,CONTRACT CONSULTANTS,Scientific Coordination for Impact Evaluation Baseline Survey in Burkina Faso,IBRD,1115541,University Hospital Heidelberg,Germany,DE,325000.00,TRUST FUND,Africa
+09/29/2013 12:00:00 AM,Q1 - FY14,SOFTWARE,Software development to support ICT-enabled Investment Climate reform in Bangladesh,IFC,14-0010,DataSoft Systems Bangladesh Li,Bangladesh,BD,,WBG,IFC VP Asia Pacific
+09/27/2013 12:00:00 AM,Q1 - FY14,CONTRACT CONSULTANTS,Consortium-Approach to the Development of Gas to Power and the Gas Ring in the Energy Community,IBRD,1090280,"Economic Consulting Associates, Ltd.",United Kingdom,GB,1290836.64,TRUST FUND,Europe and Central Asia
+09/27/2013 12:00:00 AM,Q1 - FY14,CONTRACT CONSULTANTS,Updating the Regional Balkans Infrastructure Study (REBIS),IBRD,1096179,Systema Consulting,Greece,GR,556297.09,TRUST FUND,Europe and Central Asia
+09/26/2013 12:00:00 AM,Q1 - FY14,SOFTWARE,Software development to support ICT-enabled Investment Climate reform in Bangladesh,IFC,14-0010,Technohaven Company Ltd,Bangladesh,BD,,WBG,IFC VP Asia Pacific
+09/26/2013 12:00:00 AM,Q1 - FY14,CONTRACT CONSULTANTS,Retrospective Evaluation of the Global Facility for Disaster Reduction and Recovery (GFDRR) Program in a Sample of Disaster-prone Countries,IBRD,1114772,Fundacion Dara Internacional,Spain,ES,293273.00,TRUST FUND,Sustainable Development Network
+09/26/2013 12:00:00 AM,Q1 - FY14,SOFTWARE,Software development to support ICT-enabled Investment Climate reform in Bangladesh,IFC,14-0010,ATI Limited,Bangladesh,BD,,WBG,IFC VP Asia Pacific
+09/26/2013 12:00:00 AM,Q1 - FY14,SOFTWARE,Software development to support ICT-enabled Investment Climate reform in Bangladesh,IFC,14-0010,Synesis IT Ltd.,Bangladesh,BD,,WBG,IFC VP Asia Pacific
+09/25/2013 12:00:00 AM,Q1 - FY14,CONTRACT CONSULTANTS,Investment Prioritization for Resilient Livelihoods and Ecosystems in Coastal Zones of Tanzania,IBRD,1091861,DHI,Denmark,DK,489945.00,TRUST FUND,Africa
 ~~~
 {: .output}
 
 ~~~
-$ tail SRR098026.fastq
+$ tail Corporate_Procurement_Contract_Awards.csv
 ~~~
 {: .bash}
 
 ~~~
-+SRR098026.247 HWUSI-EAS1599_1:2:1:2:1311 length=35
-#!##!#################!!!!!!!######
-@SRR098026.248 HWUSI-EAS1599_1:2:1:2:118 length=35
-GNTGNGGTCATCATACGCGCCCNNNNNNNGGCATG
-+SRR098026.248 HWUSI-EAS1599_1:2:1:2:118 length=35
-B!;?!A=5922:##########!!!!!!!######
-@SRR098026.249 HWUSI-EAS1599_1:2:1:2:1057 length=35
-CNCTNTATGCGTACGGCAGTGANNNNNNNGGAGAT
-+SRR098026.249 HWUSI-EAS1599_1:2:1:2:1057 length=35
-A!@B!BBB@ABAB#########!!!!!!!######
+04/10/2018 12:00:00 AM,Q4 - FY18,SOFTWARE,Fined Grained Authorization Framework Implementation Services,IFC,18-0383,PlainID,USA,US,986000.00,WBG,IFC VP Corporate Strategy & Resources
+06/19/2018 12:00:00 AM,Q4 - FY18,CONTRACT CONSULTANTS,Colombia Enhancing the Right of Access to Information by Victims of the Armed Conflict,IBRD,1257877,UNESCO,France,FR,280000.00,TRUST FUND,"VP, EFI Practice Group"
+05/15/2018 12:00:00 AM,Q4 - FY18,CONTRACT CONSULTANTS,Review Certain Components of MIGAs Financial Risk Management Framework,MIGA,1255929,"Oliver Wyman, Inc.",USA,US,499500.00,WBG,MIGA
+04/26/2018 12:00:00 AM,Q4 - FY18,CONTRACT CONSULTANTS,Myanmar Technical Consultant Yangon Elevated Expressway Public Private Partnership (PPP) Project,IFC,1254471,"Kyong Dong Engineering Co.,Ltd",Korea,KR,727680.00,TRUST FUND,IFC Chief Operating Officer
+04/01/2018 12:00:00 AM,Q4 - FY18,TELECOMMUNICATIONS,Global Multiprotocol Label Switching (MPLS) Wide Area Network (WAN) Services,IBRD,17-0375,SITA Information Networking,USA,US,9544230.00,WBG,Information and Technology Solutions
+05/16/2018 12:00:00 AM,Q4 - FY18,CONTRACT CONSULTANTS,Pakistan Study of China-Pakistan Economic Corridor:  Status of Implementation and Future Prospects,IBRD,1253684,CHIP Training & Consulting (Pvt) Lt,Pakistan,PK,396635.00,TRUST FUND,South Asia
+04/19/2018 12:00:00 AM,Q4 - FY18,CONTRACT CONSULTANTS,"Kenya, Somalia Children on the Move: Using Satellite Data Analysis in Conflict/ Famine-Affected Areas",IBRD,1256457,National Center for Civic Innovation,USA,US,250000.00,TRUST FUND,Development Economics and Chief Economist
+04/05/2018 12:00:00 AM,Q4 - FY18,CONTRACT CONSULTANTS,West Africa Integrated Land and Water Management for Adaptation to Climate Variability and Change (ILWAC),IBRD,1254023,International Water Mgmt. Institute,Sri Lanka,LK,347589.00,TRUST FUND,"VP, SD Practice Group"
+06/13/2018 12:00:00 AM,Q4 - FY18,SOFTWARE,Develop Online Learning Components,IBRD,18-0097,TATA Interactive Systems Ltd.,USA,US,,WBG,Development Economics and Chief Economist
+06/29/2018 12:00:00 AM,Q4 - FY18,CONTRACT CONSULTANTS,Mobile Partners Career Program,IBRD,18-0449,Net Expat Inc.,USA,US,,WBG,WBG HR Vice Presidency
 ~~~
 {: .output}
 
@@ -322,22 +322,24 @@ The `-n` option to either of these commands can be used to print the
 first or last `n` lines of a file. 
 
 ~~~
-$ head -n 1 SRR098026.fastq
+$ head -n 1 Corporate_Procurement_Contract_Awards.csv
 ~~~
 {: .bash}
 
 ~~~
-@SRR098026.1 HWUSI-EAS1599_1:2:1:0:968 length=35
+Award Date,Quarter and Fiscal Year,Commodity Category,Contract Description,WBG Organization,Selection Number,Supplier,Supplier Country,Supplier Country Code,Contract Award Amount,Fund Source,VPU description
 ~~~
 {: .output}
 
+Note that this is just the header of the CSV file.
+
 ~~~
-$ tail -n 1 SRR098026.fastq
+$ tail -n 1 Corporate_Procurement_Contract_Awards.csv
 ~~~
 {: .bash}
 
 ~~~
-A!@B!BBB@ABAB#########!!!!!!!######
+06/29/2018 12:00:00 AM,Q4 - FY18,CONTRACT CONSULTANTS,Mobile Partners Career Program,IBRD,18-0449,Net Expat Inc.,USA,US,,WBG,WBG HR Vice Presidency
 ~~~
 {: .output}
 
@@ -345,32 +347,32 @@ A!@B!BBB@ABAB#########!!!!!!!######
 
 Now we can move around in the file structure, look at files, and search files. But what if we want to copy files or move
 them around or get rid of them? Most of the time, you can do these sorts of file manipulations without the command line,
-but there will be some cases (like when you're working with a remote computer like we are for this lesson) where it will be
+but there will be some cases (like when you're working on a server) where it will be
 impossible. You'll also find that you may be working with hundreds of files and want to do similar manipulations to all 
 of those files. In cases like this, it's much faster to do these operations at the command line.
 
 ### Copying Files
 
 When working with computational data, it's important to keep a safe copy of that data that can't be accidentally overwritten or deleted. 
-For this lesson, our raw data is our FASTQ files.  We don't want to accidentally change the original files, so we'll make a copy of them
+For this lesson, our raw data is our CSV file.  We don't want to accidentally change the original file, so we'll make a copy of it
 and change the file permissions so that we can read from, but not write to, the files.
 
-First, let's make a copy of one of our FASTQ files using the `cp` command. 
+First, let's make a copy of one of our CSV file using the `cp` command. 
 
-Navigate to the `shell_data/untrimmed_fastq` directory and enter:
+Navigate to the `data/WorldBank` directory and enter:
 
 ~~~
-$ cp SRR098026.fastq SRR098026-copy.fastq
+$ cp Corporate_Procurement_Contract_Awards.csv Corporate_Procurement_Contract_Awards-copy.csv
 $ ls -F
 ~~~
 {: .bash}
 
 ~~~
-SRR097977.fastq  SRR098026-copy.fastq  SRR098026.fastq
+Corporate_Procurement_Contract_Awards-copy.csv	Corporate_Procurement_Contract_Awards.csv	download.sh*
 ~~~
 {: .output}
 
-We now have two copies of the `SRR098026.fastq` file, one of them named `SRR098026-copy.fastq`. We'll move this file to a new directory
+We now have two copies of the `Corporate_Procurement_Contract_Awards.csv` file, one of them named `Corporate_Procurement_Contract_Awards-copy.csv`. We'll move this file to a new directory
 called `backup` where we'll store our backup data files.
 
 ### Creating Directories
@@ -389,13 +391,13 @@ We can now move our backup file to this directory. We can
 move files around using the command `mv`. 
 
 ~~~
-$ mv SRR098026-copy.fastq backup
+$ mv Corporate_Procurement_Contract_Awards-copy.csv backup
 $ ls backup
 ~~~
 {: .bash}
  
 ~~~
-SRR098026-copy.fastq
+Corporate_Procurement_Contract_Awards-copy.csv
 ~~~
 {: .output}
 
@@ -403,13 +405,13 @@ The `mv` command is also how you rename files. Let's rename this file to make it
 
 ~~~
 $ cd backup
-$ mv SRR098026-copy.fastq SRR098026-backup.fastq
+$ mv Corporate_Procurement_Contract_Awards-copy.csv Corporate_Procurement_Contract_Awards-backup.csv
 $ ls
 ~~~
 {: .bash}
 
 ~~~
-SRR098026-backup.fastq
+Corporate_Procurement_Contract_Awards-backup.csv
 ~~~
 {: .output}
 
@@ -427,7 +429,7 @@ $ ls -l
 {: .bash}
 
 ~~~
--rw-r--r-- 1 dcuser dcuser 43332 Nov 15 23:02 SRR098026-backup.fastq
+-rw-r--r--@ 1 koren  staff  358585 Feb 18 16:58 Corporate_Procurement_Contract_Awards-backup.csv
 ~~~
 {: .output}
 
@@ -447,13 +449,13 @@ talk more about this in [a later lesson](http://www.datacarpentry.org/shell-geno
 Our goal for now is to change permissions on this file so that you no longer have `w` or write permissions. We can do this using the `chmod` (change mode) command and subtracting (`-`) the write permission `-w`. 
 
 ~~~
-$ chmod -w SRR098026-backup.fastq
+$ chmod -w chmod -w Corporate_Procurement_Contract_Awards-backup.csv
 $ ls -l 
 ~~~
 {: .bash}
 
 ~~~
--r--r--r-- 1 dcuser dcuser 43332 Nov 15 23:02 SRR098026-backup.fastq
+-r--r--r--@ 1 koren  staff  358585 Feb 18 16:58 Corporate_Procurement_Contract_Awards-backup.csv
 ~~~
 {: .output}
 
@@ -462,14 +464,14 @@ $ ls -l
 To prove to ourselves that you no longer have the ability to modify this file, try deleting it with the `rm` command.
 
 ~~~
-$ rm SRR098026-backup.fastq
+$ rm Corporate_Procurement_Contract_Awards-backup.csv 
 ~~~
 {: .bash}
 
 You'll be asked if you want to override your file permissions.
 
 ~~~
-rm: remove write-protected regular file ‘SRR098026-backup.fastq’? 
+override r--r--r--  koren/staff for Corporate_Procurement_Contract_Awards-backup.csv? 
 ~~~
 {: .output}
 
@@ -496,7 +498,7 @@ you will be asked whether you want to override your permission settings.
 
 > ## Exercise
 >
-> Starting in the `shell_data/untrimmed_fastq/` directory, do the following:
+> Starting in the `data/WorldBank/` directory, do the following:
 > 1. Make sure that you have deleted your backup directory and all files it contains.  
 > 2. Create a copy of each of your FASTQ files. (Note: You'll need to do this individually for each of the two FASTQ files. We haven't 
 > learned yet how to do this
